@@ -1,0 +1,41 @@
+// Movie database
+
+Movies                      add movies post (/api/movies/addNew?parameterlist
+                                            return status code with ID;
+- Id                        search movies  get (/api/movies/search?parameterlist)
+                                            return JSON;
+- Title                     delete movies  delete (/api/movies/deleteMovie?parameterlist
+                                            return status code;
+- Release Date              update movies  put (/api/movies/update?Parameterlist
+Actors                      add actor post (/api/actors/addNew?parameterlist
+- Id                        search actors  get (/api/actors/search?parameterlist)
+                                            return JSON;
+- Gender                    delete actors  delete (/api/actors/deleteMovie?parameterlist
+                                           return status code;
+- name                      update actors put (/api/actors/update?Parameterlist
+- Date of birth                             return status code;
+Directors                   add directors post (/api/directors/addNew?parameterlist
+                                            return status code with Id;
+- Id                        search directors  get (/api/directors/search?parameterlist)
+                                            return JSON;
+- Gender                    delete directors  delete (/api/directors/deleteMovie?parameterlist
+                                            return status code;
+- name                      update directors put (/api/directors/update?Parameterlist
+- date of birth                              return status code;
+Genre                       add Genre post (/api/genre/addNew?parameterlist
+                                            return status code;
+- Id                        search post  get (/api/directors/search?parameterlist)
+                                        return Json;
+- Description               delete genre delete(/api/genre/deleteGenre?parameterlist
+                                            return status code;
+Movie - Genre
+MovieId
+GenreId
+
+Movie - Actors
+MoveId
+ActorId
+
+Movie - Directors
+DirectorId
+MovieId
