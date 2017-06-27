@@ -1,9 +1,12 @@
 package mdb.webapp.movieDbApplication;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -11,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MovieDbAppController {
 	@RequestMapping(path = "/person", method = RequestMethod.GET)
 	public String person(Model model, String name, String city, String dob) {
-		Person p = new Person(name, dob);
+		Person p = new Person(name);
 		model.addAttribute("person", p);
 		return "person";
 	}
@@ -28,4 +31,11 @@ public class MovieDbAppController {
 		session.setAttribute("userName", userName);
 		return "redirect:/";
 	}	
+	
+	@RequestMapping(path = "/movie", method = RequestMethod.GET)
+	public String movie(Model model, String title, String releaseDate, String genre) {
+		Movie m = new Movie(title, releaseDate, genre);
+		model.addAttribute("movie", m);
+		return "movie";
+	}
 }

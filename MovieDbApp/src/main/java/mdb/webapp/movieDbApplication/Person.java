@@ -6,10 +6,8 @@ public class Person {
     String name;
     String dob; // verify how to store dates with database used
 
-
-    public Person(String name, String dob) {
+    public Person(String name) {
         this.name = name;
-        this.dob = dob;
     }
 
 	public String getName() {
