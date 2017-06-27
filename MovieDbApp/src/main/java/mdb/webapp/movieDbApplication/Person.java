@@ -4,13 +4,12 @@ package mdb.webapp.movieDbApplication;
 public class Person {
 	
     String name;
-    String city;
-    int age;
+    String dob; // verify how to store dates with database used
 
-    public Person(String name, String city, int age) {
+
+    public Person(String name, String dob) {
         this.name = name;
-        this.city = city;
-        this.age = age;
+        this.dob = dob;
     }
 
 	public String getName() {
@@ -21,20 +20,12 @@ public class Person {
 		this.name = name;
 	}
 
-	public String getCity() {
-		return city;
+	public String getDob() {
+		return dob;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
+	public void setDob(String dob) {
+		this.dob = dob;
 	}  
 
 }

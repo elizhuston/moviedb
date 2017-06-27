@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MovieDbAppController {
 	@RequestMapping(path = "/person", method = RequestMethod.GET)
-	public String person(Model model, String name, String city, int age) {
-		Person p = new Person(name, city, age);
+	public String person(Model model, String name, String city, String dob) {
+		Person p = new Person(name, dob);
 		model.addAttribute("person", p);
 		return "person";
 	}
