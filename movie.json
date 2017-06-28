@@ -1,0 +1,17 @@
+{
+"title" : "Pulp Fiction"
+, "releaseDate" : "1994"
+, "genre" : "crime",
+"director" : [{ "person" : "Quentin Tarantino"}],
+"actors": [
+{
+"person" : "Quentin Tarantino",
+"person" :  "John Travolta" ,
+"person" : "Samuel Jackson",
+"person" : "Harvey Keitel",
+"person" : "Uma Thurman"}
+],
+"authors" : [
+{"person" : "Quentin Tarantino",
+"person" : "Roger Avary"}]
+}
