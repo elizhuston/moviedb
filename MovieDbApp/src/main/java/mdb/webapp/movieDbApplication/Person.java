@@ -34,6 +34,18 @@ public class Person implements Serializable{
     
     public Person() {}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -42,6 +54,10 @@ public class Person implements Serializable{
 		this.name = name;
 	}
 
-
+	public void merge(Person other) {
+		if (other.name != null) {
+			this.name = other.name;
+		}
+	}
 
 }

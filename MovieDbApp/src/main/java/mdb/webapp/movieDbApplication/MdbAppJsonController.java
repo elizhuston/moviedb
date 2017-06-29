@@ -1,9 +1,12 @@
 package mdb.webapp.movieDbApplication;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,22 +29,42 @@ import org.springframework.web.bind.annotation.*;
 public class MdbAppJsonController {
 	@Autowired
 	private MovieRepository movieRepository;
+	
+	@Autowired
+	private PersonRepository personRepository;
 
-	@RequestMapping(path = "/person.json", method = RequestMethod.GET)
-	public Person jsonHome(String name) {
-
-		// if (dob == null) {
-		// dob = "1/1/1900";
-		// }
+	@RequestMapping(path = "/api/person", method = RequestMethod.GET)
+	public Person findPerson(String name) {
 		return new Person(name);
+	}	
+	
+	@RequestMapping(path = "/api/person", method = RequestMethod.POST)
+	public Person createPerson(@RequestBody Person p)  {
+		personRepository.save(p);
+		return p;
+	}	
+	@RequestMapping(path = "/api/person/{id}", method = RequestMethod.DELETE)
+	public void deletePerson(@PathVariable(name="id", required=true) Integer id) {	
+		personRepository.delete(id);
 	}
-
+	
+	@RequestMapping(path = "/api/person", method = RequestMethod.PUT)
+	public ResponseEntity<Person> updatePerson(@RequestBody Person p) {	
+		if (p.getId() == 0) {
+			return new ResponseEntity<Person>(HttpStatus.BAD_REQUEST);
+		}
+		Person existing = personRepository.findOne(p.getId());
+		existing.merge(p);
+		personRepository.save(existing);
+		return new ResponseEntity<Person>(p, HttpStatus.OK);
+	}
+		
+	
 	@RequestMapping(path = "/api/movie", method = RequestMethod.POST)
 	public Movie createMovie(@RequestBody Movie m)  {
 		movieRepository.save(m);
 		return m;
-	}	
-	
+	}
 	
 	public void movie(@RequestBody Movie m) {
 		// save the movie
@@ -65,5 +88,16 @@ public class MdbAppJsonController {
 		return new ResponseEntity<Movie>(m, HttpStatus.OK);
 	}
 	
+	@RequestMapping(path = "/movie/title/{title}", method = RequestMethod.GET)
+	public ResponseEntity<List<Movie>> findByTitleLike(@PathVariable(name="title", required=true) String title){
+		System.out.println("/movie/title/ is " + title);
+		if (title == null){
+			return new ResponseEntity<List<Movie>>(HttpStatus.BAD_REQUEST);
+		}
+		List<Movie> movies=movieRepository.findByTitleLike(title);
+		System.out.println("Size of movies is" +  movies.size() );
+		return new ResponseEntity<List<Movie>>(movies, HttpStatus.OK);
+		
+	}
 
 }
