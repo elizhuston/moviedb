@@ -1,30 +1,35 @@
 package mdb.webapp.movieDbApplication;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 
-//REST
+@SpringBootApplication
 @RestController
+
 public class MdbAppJsonController {
 	@Autowired
-    private MovieRepository movieRepository;
-	
+	private MovieRepository movieRepository;
+
 	@RequestMapping(path = "/person.json", method = RequestMethod.GET)
-	public Person jsonHome(String name, String dob) {
-		
-		if (dob == null) {
-			dob = "1/1/1900";
-		}
+	public Person jsonHome(String name) {
+
+		// if (dob == null) {
+		// dob = "1/1/1900";
+		// }
 		return new Person(name);
 	}
-	
+
 	@RequestMapping(path = "/api/movie", method = RequestMethod.POST)
 	public Movie createMovie(@RequestBody Movie m)  {
 		movieRepository.save(m);
@@ -41,5 +46,10 @@ public class MdbAppJsonController {
 		movieRepository.save(m);
 		return m;
 	}	
+	public void movie(@RequestBody Movie m) {
+		// save the movie
+		movieRepository.save(m);
+		;
+	}
 
 }

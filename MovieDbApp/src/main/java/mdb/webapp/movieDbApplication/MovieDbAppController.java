@@ -1,7 +1,8 @@
 package mdb.webapp.movieDbApplication;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,10 +39,12 @@ public class MovieDbAppController {
 		return "redirect:/movie";
 	}	
 	
+		
+	
 	@RequestMapping(path = "/movie", method = RequestMethod.GET)
-	public String movie(Model model, String title, String releaseDate, String genre) {
-		movieRepository.findAll();
-		Movie m = new Movie(title, releaseDate, genre);
+
+	public String movie(Model model, String title, String releaseDate, String genre, List<Person> director, List<Person> actors,List<Person> authors) {
+		Movie m = new Movie(title, releaseDate, genre, director,actors,authors);
 		model.addAttribute("movie", m);
 		return "movie";
 	}
