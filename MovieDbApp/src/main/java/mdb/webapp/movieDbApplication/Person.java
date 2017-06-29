@@ -1,5 +1,7 @@
 package mdb.webapp.movieDbApplication;
 
+import java.io.Serializable;
+
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,10 +12,14 @@ import javax.persistence.InheritanceType;
 
 
 @Entity
-@DiscriminatorColumn(name="PROJ_TYPE")
-@Inheritance(strategy=InheritanceType.JOINED)
-public class Person {
+@Table(name="person")
+public class Person implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
     @GeneratedValue
     private int id;
@@ -35,12 +41,6 @@ public class Person {
 		this.name = name;
 	}
 
-//	public String getDob() {
-//		return dob;
-//	}
-//
-//	public void setDob(String dob) {
-//		this.dob = dob;
-//	}  
+
 
 }

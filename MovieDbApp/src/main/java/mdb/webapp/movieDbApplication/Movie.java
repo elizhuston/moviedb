@@ -102,4 +102,16 @@ public class Movie implements Serializable {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}	
+	
+	public void merge(Movie other) {
+		if (other.title != null) {
+			this.title = other.title;
+		}
+		if (other.releaseDate != null){
+			this.releaseDate=other.releaseDate;
+		}
+		if (other.genre != null){
+			this.genre=other.genre;
+		}
+	}
 }
