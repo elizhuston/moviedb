@@ -1,8 +1,30 @@
 
 package mdb.webapp.movieDbApplication;
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Movie {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+
+@Entity
+@Table(name = "movie")
+
+public class Movie implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+    @GeneratedValue
+    private int id;
+	
 	private String title;
 	private String releaseDate;
 	private String genre;
@@ -46,5 +68,5 @@ public class Movie {
 
 	public void setGenre(String genre) {
 		this.genre = genre;
-	}	
+	}
 }
