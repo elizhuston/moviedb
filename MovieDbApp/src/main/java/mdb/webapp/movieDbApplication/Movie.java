@@ -1,9 +1,15 @@
 
 package mdb.webapp.movieDbApplication;
 
-import java.util.List;
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.util.List;
+import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,10 +19,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "movie")
 
 public class Movie implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
     @GeneratedValue
     private int id;
@@ -101,6 +114,7 @@ public class Movie implements Serializable {
 
 	public void setGenre(String genre) {
 		this.genre = genre;
+
 	}	
 	
 	public void merge(Movie other) {
@@ -113,5 +127,6 @@ public class Movie implements Serializable {
 		if (other.genre != null){
 			this.genre=other.genre;
 		}
+
 	}
 }

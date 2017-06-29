@@ -25,6 +25,7 @@ public class Person implements Serializable{
     private int id;
 	
     String name;
+    
 //    String dob; // verify how to store dates with database used
 
     public Person(String name) {
