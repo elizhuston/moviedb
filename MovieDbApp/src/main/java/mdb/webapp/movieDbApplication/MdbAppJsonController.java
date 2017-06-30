@@ -43,6 +43,13 @@ public class MdbAppJsonController {
 		personRepository.save(p);
 		return p;
 	}	
+	
+	@RequestMapping(path = "/api/director", method = RequestMethod.POST)
+	public Person createDirector(@RequestBody Person p)  {
+		personRepository.save(p);
+		return p;
+	}
+	
 	@RequestMapping(path = "/api/person/{id}", method = RequestMethod.DELETE)
 	public void deletePerson(@PathVariable(name="id", required=true) Integer id) {	
 		personRepository.delete(id);
@@ -62,7 +69,7 @@ public class MdbAppJsonController {
 	
 	@RequestMapping(path = "/api/movie", method = RequestMethod.POST)
 	public Movie createMovie(@RequestBody Movie m)  {
-		movieRepository.save(m);
+			movieRepository.save(m);
 		return m;
 	}
 	
@@ -99,5 +106,78 @@ public class MdbAppJsonController {
 		return new ResponseEntity<List<Movie>>(movies, HttpStatus.OK);
 		
 	}
-
+	@RequestMapping(path = "/movie/person/{name}", method = RequestMethod.GET)
+	public ResponseEntity<List<Movie>> findByPersonLike(@PathVariable(name="name", required=true) String name){
+		System.out.println("/movie/name/ is " + name);
+		if (name == null){
+			return new ResponseEntity<List<Movie>>(HttpStatus.BAD_REQUEST);
+		}
+		List<Movie> movies=movieRepository.findByPersonLike(name);
+		System.out.println("Size of movies is" +  movies.size() );
+		return new ResponseEntity<List<Movie>>(movies, HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(path = "/movie/genre/{genre}", method = RequestMethod.GET)
+	public ResponseEntity<List<Movie>> findByGenreLike(@PathVariable(name="genre", required=true) String genre){
+		System.out.println("/movie/genre/ is " + genre);
+		if (genre == null){
+			return new ResponseEntity<List<Movie>>(HttpStatus.BAD_REQUEST);
+		}
+		List<Movie> movies=movieRepository.findByGenreLike(genre);
+		System.out.println("Size of movies is" +  movies.size() );
+		return new ResponseEntity<List<Movie>>(movies, HttpStatus.OK);
+		
+	}
+	
+	
+	@RequestMapping(path = "/movie/year/{year}", method = RequestMethod.GET)
+	public ResponseEntity<List<Movie>> findByYearLike(@PathVariable(name="year", required=true) String year){
+		System.out.println("/movie/year/ is " + year);
+		if (year == null){
+			return new ResponseEntity<List<Movie>>(HttpStatus.BAD_REQUEST);
+		}
+		List<Movie> movies=movieRepository.findByYearLike(year);
+		System.out.println("Size of movies is" +  movies.size() );
+		return new ResponseEntity<List<Movie>>(movies, HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(path = "/actor/{name}", method = RequestMethod.GET)
+	public ResponseEntity<List<Person>> findByActorLike(@PathVariable(name="name", required=true) String name){
+		System.out.println("/actor/name/ is " + name);
+		if (name == null){
+			return new ResponseEntity<List<Person>>(HttpStatus.BAD_REQUEST);
+		}
+		List<Person> actors=personRepository.findByActorLike(name);
+		System.out.println("Size of actors is" +  actors.size() );
+		return new ResponseEntity<List<Person>>(actors, HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(path = "/director/{name}", method = RequestMethod.GET)
+	public ResponseEntity<List<Person>> findByDirectorLike(@PathVariable(name="name", required=true) String name){
+		System.out.println("/director/name/ is " + name);
+		if (name == null){
+			return new ResponseEntity<List<Person>>(HttpStatus.BAD_REQUEST);
+		}
+		List<Person> directors=personRepository.findByDirectorLike(name);
+		System.out.println("Size of directors is" +  directors.size() );
+		return new ResponseEntity<List<Person>>(directors, HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(path = "/author/{name}", method = RequestMethod.GET)
+	public ResponseEntity<List<Person>> findByAuthorLike(@PathVariable(name="name", required=true) String name){
+		System.out.println("/author/name/ is " + name);
+		if (name == null){
+			return new ResponseEntity<List<Person>>(HttpStatus.BAD_REQUEST);
+		}
+		List<Person> authors=personRepository.findByAuthorLike(name);
+		System.out.println("Size of authors is" +  authors.size() );
+		return new ResponseEntity<List<Person>>(authors, HttpStatus.OK);
+		
+	}
+	
+	
 }

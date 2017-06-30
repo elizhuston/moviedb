@@ -6,6 +6,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.List;
@@ -39,21 +40,24 @@ public class Movie implements Serializable {
 	private String genre;
 	
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	List<Person> director;
+	@JoinColumn(name="DirecorId")
+	private List<Person> directors;
 	
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	List<Person> actors;
+	@JoinColumn(name="actorId")
+	private List<Person> actors;
 	
-	@ManyToMany( cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	List<Person> author;
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinColumn(name="authorId")
+	private List<Person> authors;
 	
-	public Movie(String title, String releaseDate, String genre, List<Person> director, List<Person> actors,List<Person> authors) {
+	public Movie(String title, String releaseDate, String genre, List<Person> directors, List<Person> actors,List<Person> authors) {
 		this.title = title;
 		this.releaseDate = releaseDate;
 		this.genre = genre;
-     	this.director = director;
+     	this.directors = directors;
 		this.actors = actors;
-		this.author = authors;
+		this.authors = authors;
 	}
 	
 	public int getId() {
@@ -64,12 +68,12 @@ public class Movie implements Serializable {
 		this.id = id;
 	}
 
-	public List<Person> getDirector() {
-		return director;
+	public List<Person> getDirectors() {
+		return directors;
 	}
 
-	public void setDirector(List<Person> director) {
-		this.director = director;
+	public void setDirector(List<Person> directors) {
+		this.directors = directors;
 	}
 
 	public List<Person> getActors() {
@@ -81,11 +85,11 @@ public class Movie implements Serializable {
 	}
 
 	public List<Person> getAuthors() {
-		return author;
+		return authors;
 	}
 
 	public void setAuthors(List<Person> authors) {
-		this.author = authors;
+		this.authors = authors;
 	}
 
 	public Movie() {
@@ -126,6 +130,10 @@ public class Movie implements Serializable {
 		}
 		if (other.genre != null){
 			this.genre=other.genre;
+
+		}
+		if (!other.directors.isEmpty()){
+			this.directors=other.directors;
 		}
 
 	}
