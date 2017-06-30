@@ -130,11 +130,15 @@ public class Movie implements Serializable {
 		}
 		if (other.genre != null){
 			this.genre=other.genre;
-
 		}
-		if (!other.directors.isEmpty()){
+		if (other.directors != null){
 			this.directors=other.directors;
 		}
-
+		if (other.actors != null){
+			this.actors=other.actors;
+		}
+		if (other.authors != null){
+			this.authors=other.authors;
+		}
 	}
 }

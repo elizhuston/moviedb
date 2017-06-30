@@ -86,10 +86,11 @@ public class MdbAppJsonController {
 	
 	@RequestMapping(path = "/api/movie", method = RequestMethod.PUT)
 	public ResponseEntity<Movie> updateMovie(@RequestBody Movie m) {	
+		System.out.println(" PUT/api/movie id is" + m.getId());
 		if (m.getId() == 0) {
 			return new ResponseEntity<Movie>(HttpStatus.BAD_REQUEST);
 		}
-		Movie existing = movieRepository.findOne(m.getId());
+		Movie existing = movieRepository.findByID(m.getId());
 		existing.merge(m);
 		movieRepository.save(existing);
 		return new ResponseEntity<Movie>(m, HttpStatus.OK);

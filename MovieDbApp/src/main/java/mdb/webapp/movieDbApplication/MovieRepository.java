@@ -19,5 +19,8 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
 	@Query("Select m from Movie m where release_date like CONCAT('%',:year, '%')")
 	public List<Movie> findByYearLike(@Param("year") String year);
+	
+	@Query("Select m from Movie m where id = :id")
+	public Movie findByID(@Param("id") int i);
 
 }

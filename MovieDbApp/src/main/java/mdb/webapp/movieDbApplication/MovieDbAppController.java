@@ -23,8 +23,7 @@ public class MovieDbAppController {
 		return "person";
 	}
 	
-  
-	
+  	
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpSession session) {

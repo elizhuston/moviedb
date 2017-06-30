@@ -1,9 +1,7 @@
 {
   "id" : "6",
-  "directors" : [{ "id" : "1"}],
-  "actors" : [
-    {"id" : "5"},
-    {"id" : "8"},
-    {"id" : "6"}
-  ]
+  "title" : "Pulp Fiction",
+  "releaseDate" : "1994",
+  "genre" : "crime",
+  "directors" : [{ "id" : "1", "name" : "Quentin Tarantino"}]
 }
