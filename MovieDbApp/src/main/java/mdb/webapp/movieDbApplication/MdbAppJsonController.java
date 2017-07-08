@@ -59,10 +59,14 @@ public class MdbAppJsonController {
 	}
 		
 	
-	@RequestMapping(path = "/api/movie", method = RequestMethod.POST)
-	public Movie createMovie(@RequestBody Movie m)  {
-			movieRepository.save(m);
-		return m;
+	@RequestMapping(path = "/api/movie/", method = RequestMethod.POST)
+	public ResponseEntity<Movie> createMovie(@RequestBody Movie m)  {
+		movieRepository.save(m);
+//		if (m.getId() == 0) {
+//			return new ResponseEntity<Movie>(HttpStatus.BAD_REQUEST);
+//		}
+		return new ResponseEntity<Movie>(HttpStatus.OK);
+			
 	}
 	
 	public void movie(@RequestBody Movie m) {
@@ -88,7 +92,7 @@ public class MdbAppJsonController {
 		return new ResponseEntity<Movie>(m, HttpStatus.OK);
 	}
 	
-	@RequestMapping(path = "/movie/title/{title}", method = RequestMethod.GET)
+	@RequestMapping(path = "/movie/title/{title}", method = RequestMethod.GET, produces= "application/json")
 	public ResponseEntity<List<Movie>> findByTitleLike(@PathVariable(name="title", required=true) String title){
 		System.out.println("/movie/title/ is " + title);
 		if (title == null){
