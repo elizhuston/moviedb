@@ -1,12 +1,13 @@
 {
-  "id" : "7",
-  "title" : "Reservoir Dogs",
-  "releaseDate" : "1992",
-  "genre" : "crime",
-  "actors" : [
-    { "id" : "1", "name" : "Quentin Tarantino"},
-    {"id" : "5", "name" : "Harvey Keitel"},
-    {"id" : "8", "name" : "Tim Roth"} ,
-    {"id" : "6", "name" : "Steve Buscemi"}
-  ]
+  "id" : "10",
+  "directors" : [{ "name" : "Joel Coen"},
+                   { "name" : "Ethan Coen"}
+                 ],
+  "actors" : [{ "name" : "George Clooney"},
+              { "name" : "John Turturro"},
+              { "name" : "John Goodman"}
+            ],
+  "authors" : [{ "name" : "Homer"},
+               { "name" : "Ethan Coen"}
+              ]
 }

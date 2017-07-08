@@ -2,12 +2,10 @@
   "title" : "Pulp Fiction",
   "releaseDate" : "1994",
   "genre" : "crime",
-  "director" : [{ "name" : "Quentin Tarantino"}],
   "actors": [
       {"name" : "Quentin Tarantino"},
       {"name" : "John Travolta"},
       {"name" : "Uma Thurman"},
       {"name" : "Harvey Keitel"}
-    ],
-    "authors" : [{"name" : "Quentin Tarantino"}]
+    ]
 }

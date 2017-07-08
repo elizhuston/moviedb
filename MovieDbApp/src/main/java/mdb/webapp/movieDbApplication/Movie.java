@@ -9,9 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Persistable;
+
 import java.util.List;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,46 +23,58 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "movie")
 
 public class Movie implements Serializable {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    @GeneratedValue
-    private int id;
-	
+	@GeneratedValue
+	private int id;
+
+	@Column(unique=true)
 	private String title;
 	private String releaseDate;
 	private String genre;
-	
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinColumn(name="DirecorId")
+
+	// I tried the mappedBy here - it only works with the first many-to-many relationship to Person and we have 3
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "directorsId")
 	private List<Person> directors;
-	
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinColumn(name="actorId")
+
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "actorsId")
 	private List<Person> actors;
-	
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinColumn(name="authorId")
+
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "authorsId")
 	private List<Person> authors;
-	
-	public Movie(String title, String releaseDate, String genre, List<Person> directors, List<Person> actors,List<Person> authors) {
+
+	public Movie() {
+
+	}
+
+	public Movie(String title, String releaseDate, String genre, List<Person> directors, List<Person> actors,
+			List<Person> authors) {
 		this.title = title;
 		this.releaseDate = releaseDate;
 		this.genre = genre;
-     	this.directors = directors;
+		this.directors = directors;
 		this.actors = actors;
 		this.authors = authors;
 	}
-	
+
+	public Movie(String title, String releaseDate, String genre) {
+		this.title = title;
+		this.releaseDate = releaseDate;
+		this.genre = genre;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -72,7 +87,7 @@ public class Movie implements Serializable {
 		return directors;
 	}
 
-	public void setDirector(List<Person> directors) {
+	public void setDirectors(List<Person> directors) {
 		this.directors = directors;
 	}
 
@@ -90,10 +105,6 @@ public class Movie implements Serializable {
 
 	public void setAuthors(List<Person> authors) {
 		this.authors = authors;
-	}
-
-	public Movie() {
-		
 	}
 
 	public String getTitle() {
@@ -119,26 +130,26 @@ public class Movie implements Serializable {
 	public void setGenre(String genre) {
 		this.genre = genre;
 
-	}	
-	
+	}
+
 	public void merge(Movie other) {
 		if (other.title != null) {
 			this.title = other.title;
 		}
-		if (other.releaseDate != null){
-			this.releaseDate=other.releaseDate;
+		if (other.releaseDate != null) {
+			this.releaseDate = other.releaseDate;
 		}
-		if (other.genre != null){
-			this.genre=other.genre;
+		if (other.genre != null) {
+			this.genre = other.genre;
 		}
-		if (other.directors != null){
-			this.directors=other.directors;
+		if (other.directors != null) {
+			this.directors = other.directors;
 		}
-		if (other.actors != null){
-			this.actors=other.actors;
+		if (other.actors != null) {
+			this.actors = other.actors;
 		}
-		if (other.authors != null){
-			this.authors=other.authors;
+		if (other.authors != null) {
+			this.authors = other.authors;
 		}
 	}
 }
