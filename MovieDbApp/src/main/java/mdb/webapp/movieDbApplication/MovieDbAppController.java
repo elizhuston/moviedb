@@ -1,52 +1,46 @@
 package mdb.webapp.movieDbApplication;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+//import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
 @Controller
-
+//@EnableAutoConfiguration
+//@EnableWebMvc
+//@ComponentScan({"org.app.genesis.client.controller","org.app.genesis.commons.service",
+//    "org.app.app.commons.security","org.app.genesis.inventory.service","org.app.genesis.client.auth"})
+//@EnableJpaRepositories(basePackages = "org.app.genesis.*.repo")
+//@EntityScan(basePackages = "org.app.genesis.*.model")
 public class MovieDbAppController {
-	@Autowired
-    private MovieRepository movieRepository;
 	
-	@RequestMapping(path = "/person", method = RequestMethod.GET)
-	public String person(Model model, String name) {
-		Person p = new Person(name);
-		model.addAttribute("person", p);
-		return "person";
-	}
-	
-  	
+	   @RequestMapping(value="/")
+	    public String jspIndex() {
+	        return "index";
+	    }
 
-	@RequestMapping(path = "/", method = RequestMethod.GET)
-	public String home(Model model, HttpSession session) {
-		model.addAttribute("name", session.getAttribute("userName"));
-		return "home";
-	}
+	    @RequestMapping(value="/login")
+	    public String login() {
+	        return "login";
+	    }
 
-	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	public String login(HttpSession session, String userName, String other) {
-		System.out.println(other);
-		session.setAttribute("userName", userName);
-		return "redirect:/movie";
-	}	
-	
-		
-	
-	@RequestMapping(path = "/movie", method = RequestMethod.GET)
+//	    @RequestMapping(value="/logout")
+//	    public String logout(HttpServletRequest request, HttpServletResponse response) {
+//	        org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//	        if (auth != null){
+//	            new SecurityContextLogoutHandler().logout(request, response, auth);
+//	        }
+//	        request.setAttribute("logout","logout");
+//	        return "login";
+//	    }
 
-	public String movie(Model model, String title, String releaseDate, String genre, List<Person> director, List<Person> actors,List<Person> authors) {
-		Movie m = new Movie(title, releaseDate, genre, director,actors,authors);
-		model.addAttribute("movie", m);
-		return "movie";
-	}
-
-	
 }

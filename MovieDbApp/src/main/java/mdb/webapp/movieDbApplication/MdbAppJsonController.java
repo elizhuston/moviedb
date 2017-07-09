@@ -75,6 +75,7 @@ public class MdbAppJsonController {
 		return new ResponseEntity<Person>(p, HttpStatus.OK);
 	}
 
+
 	// creates a new movie - at least title must be provided and must not
 	// already exist
 	@RequestMapping(path = "/api/movie", method = RequestMethod.POST)
@@ -138,6 +139,7 @@ public class MdbAppJsonController {
 		} else {
 			System.out.println("Authors NULL");
 		}
+
 
 		movieRepository.save(m);
 		return new ResponseEntity<Movie>(m, HttpStatus.CREATED);
@@ -256,12 +258,14 @@ public class MdbAppJsonController {
 		return new ResponseEntity<Movie>(m, HttpStatus.OK);
 	}
 
+
 	// returns movie object(s) matching whose title matches or partially matches
 	// title in parameter, case insensitive
 	@RequestMapping(path = "/api/movie/title/{title}", method = RequestMethod.GET)
 	public ResponseEntity<List<Movie>> findByTitleLike(@PathVariable(name = "title", required = true) String title) {
 		System.out.println("/api/movie/title/{title} is " + title);
 		if (title == null) {
+
 			return new ResponseEntity<List<Movie>>(HttpStatus.BAD_REQUEST);
 		}
 		List<Movie> movies = movieRepository.findByTitleLike(title);
