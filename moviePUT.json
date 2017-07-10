@@ -1,14 +1,13 @@
 {
-  "id" : "11",
-  "title" : "Reservoir Dogs",
-  "releaseDate" : "1992",
+  "id" : "2",
+  "title" : "Pulp Fiction",
+  "releaseDate" : "1994",
   "genre" : "crime",
   "directors" : [{ "name" : "Quentin Tarantino"}],
   "actors": [
       {"name" : "Quentin Tarantino"},
-      {"name" : "Tim Roth"},
-      {"name" : "Michael Madsen"},
-      {"name" : "Steve Buscemi"},
+      {"name" : "John Travolta"},
+      {"name" : "Uma Thurman"},
       {"name" : "Harvey Keitel"}
     ],
     "authors" : [{ "name" : "Quentin Tarantino"},

@@ -1,13 +1,13 @@
 {
-  "id" : "6",
+  "id" : "1",
   "title" : "Reservoir Dogs",
   "releaseDate" : "1992",
   "genre" : "crime",
-  "directors" : [{ "id" : "1", "name" : "Quentin Tarantino"}],
+  "directors" : [{ "name" : "Quentin Tarantino"}],
   "actors" : [
-    {"id" : "5", "name" : "Harvey Keitel"},
-    {"id" : "8", "name" : "Tim Roth"} ,
-    {"id" : "6", "name" : "Steve Buscemi"}
+    {"name" : "Harvey Keitel"},
+    { "name" : "Tim Roth"} ,
+    {"name" : "Steve Buscemi"}
   ],
-  "authors" : [{ "id" : "1", "name" : "Quentin Tarantino"}]
+  "authors" : [{"name" : "Quentin Tarantino"}]
 }

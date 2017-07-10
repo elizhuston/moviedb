@@ -82,7 +82,7 @@ public class MdbAppJsonController {
 	public ResponseEntity<Movie> createMovie(@RequestBody Movie m) {
 		String title = m.getTitle();
 		if (title == null) {
-			System.out.println("/api/movie POST tite is null");
+			System.out.println("/api/movie POST title is null");
 			return new ResponseEntity<Movie>(HttpStatus.BAD_REQUEST);
 		}
 		System.out.println("/api/movie POST " + title);

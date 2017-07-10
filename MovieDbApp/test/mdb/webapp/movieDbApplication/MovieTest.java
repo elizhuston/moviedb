@@ -1,7 +1,13 @@
 package mdb.webapp.movieDbApplication;
 import com.google.gson.Gson;
+import mdb.webapp.movieDbApplication.*;;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import org.assertj.core.condition.AllOf;
+import org.hamcrest.Matchers;
+import org.hamcrest.beans.HasPropertyWithValue;
+import org.hamcrest.core.Is;
 import org.springframework.http.MediaType;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,10 +24,10 @@ import com.jayway.jsonpath.JsonPath;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { MdbApp.class })
 @WebAppConfiguration
-public class MdbAppJsonControllerTest {
+public class MovieTest {
     String PATH = "$.title";
     JsonPath compiledPath = JsonPath.compile(PATH);
-    String name = "True Romance";
+    String name = "Pulp Fiction";
     private MockMvc mockMvc;
     @Autowired
     private WebApplicationContext wac;
@@ -40,17 +46,29 @@ public class MdbAppJsonControllerTest {
     @Before
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-    }
+    } 
+    
     @Test
     public void createMovie() throws Exception {
-        Movie m = new Movie("Mary", "Today", "Comedy");
+        Movie m = new Movie("Inglourious Basterds", "2009", "drama");
         String json = new Gson().toJson(m);
-        mockMvc.perform(post("/api/movies/").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
-                .content(json));
+        mockMvc.perform(post("/api/movie/").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
+                .content(json)).andExpect(status().isCreated());;
     }
+    
     @Test
-    public void getMovieByTitle() throws Exception {
-        this.mockMvc.perform(get("/movie/title/True")).andExpect(status().isOk())
-                .andExpect(content().contentType("application/json;charset=UTF-8"));
+    public void getTest() throws Exception{
+        mockMvc.perform(get("/api/director/quen"))
+        .andExpect(status().isOk())
+        .andExpect(model().attribute(
+//        		"personList", 
+//        		Matchers.everyItem(AllOf.allOf(
+//        				HasPropertyWithValue.hasProperty("name", Is<Person>.is("Quentin Tarantino"))))));
+//        (jsonPath("$.name").value("Quentin Tarantino"));
     }
+//    @Test
+//    public void getMovieByTitle() throws Exception {
+//        this.mockMvc.perform(get("api/movie/title/Mary")).andExpect(status().isOk())
+//                .andExpect(content().contentType("MediaType.APPLICATION_JSON"));
+//    }
 }
