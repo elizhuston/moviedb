@@ -1,6 +1,5 @@
 package mdb.webapp.movieDbApplication;
 import com.google.gson.Gson;
-import mdb.webapp.movieDbApplication.*;;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -56,11 +55,11 @@ public class MovieTest {
                 .content(json)).andExpect(status().isCreated());;
     }
     
-    @Test
-    public void getTest() throws Exception{
-        mockMvc.perform(get("/api/director/quen"))
-        .andExpect(status().isOk())
-        .andExpect(model().attribute(
+//    @Test
+//    public void getTest() throws Exception{
+//        mockMvc.perform(get("/api/director/quen"))
+//        .andExpect(status().isOk())
+//        .andExpect(model().attribute(
 //        		"personList", 
 //        		Matchers.everyItem(AllOf.allOf(
 //        				HasPropertyWithValue.hasProperty("name", Is<Person>.is("Quentin Tarantino"))))));
@@ -71,4 +70,3 @@ public class MovieTest {
 //        this.mockMvc.perform(get("api/movie/title/Mary")).andExpect(status().isOk())
 //                .andExpect(content().contentType("MediaType.APPLICATION_JSON"));
 //    }
-}

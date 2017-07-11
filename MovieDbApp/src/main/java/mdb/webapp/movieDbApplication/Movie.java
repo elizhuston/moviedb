@@ -49,7 +49,7 @@ public class Movie implements Serializable {
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name = "actorsId")
-	private List<Person> actors;
+	private List<Person > actors;
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name = "authorsId")

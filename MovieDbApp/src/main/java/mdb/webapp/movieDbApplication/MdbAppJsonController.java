@@ -18,7 +18,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
 @RestController
-@EnableWebMvc
 public class MdbAppJsonController {
 	@Autowired
 	private MovieRepository movieRepository;
