@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @SpringBootApplication
 @RestController
+@Api(value = "Movies ", description = "Movies API")
 public class MdbAppJsonController {
 	@Autowired
 	private MovieRepository movieRepository;
@@ -27,6 +31,7 @@ public class MdbAppJsonController {
 
 	// returns person object matching name
 	@RequestMapping(path = "/api/person/{name}", method = RequestMethod.GET)
+    @ApiOperation(value = "Get Person by Name", notes = "returns person object matching name")
 	public ResponseEntity<List<Person>> findPerson(@PathVariable(name = "name", required = true) String name) {
 		System.out.println("/api/person GET " + name);
 		List<Person> people = personRepository.findPersonsByNameLike(name);
