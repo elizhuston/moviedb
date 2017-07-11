@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @SpringBootApplication
 @RestController
+@Api(value = "Movies API")
 public class MdbAppJsonController {
 	@Autowired
 	private MovieRepository movieRepository;
@@ -27,6 +31,7 @@ public class MdbAppJsonController {
 
 	// returns person object matching name
 	@RequestMapping(path = "/api/person/{name}", method = RequestMethod.GET)
+	@ApiOperation(value = "Get Person", notes = "Returns person object matching name")
 	public ResponseEntity<List<Person>> findPerson(@PathVariable(name = "name", required = true) String name) {
 		System.out.println("/api/person GET " + name);
 		List<Person> people = personRepository.findPersonsByNameLike(name);
@@ -36,6 +41,7 @@ public class MdbAppJsonController {
 	// adds a new person - name must be in request body and must not already
 	// exist
 	@RequestMapping(path = "/api/person", method = RequestMethod.POST)
+	@ApiOperation(value = "Add a Person", notes = "adds a new person - name must be in request body and must not already\n" + " exist")
 	public ResponseEntity<Person> createPerson(@RequestBody Person p) {
 		System.out.println("/api/person POST " + p.name);
 		if (p.getName() == null) {
@@ -51,6 +57,7 @@ public class MdbAppJsonController {
 
 	// deletes an existing person whose ID matches parameter in URL
 	@RequestMapping(path = "/api/person/{id}", method = RequestMethod.DELETE)
+	@ApiOperation(value = "Delete Person", notes = "Deletes an existing person whose ID matches parameter in URL")
 	public ResponseEntity<String> deletePerson(@PathVariable(name = "id", required = true) Integer id) {
 		System.out.println("/api/person/{id} DELETE " + id);
 		if (id == null) {
@@ -63,6 +70,7 @@ public class MdbAppJsonController {
 	// update/merge for an existing person whose ID matches "id" in json body of
 	// request
 	@RequestMapping(path = "/api/person", method = RequestMethod.PUT)
+	@ApiOperation(value = "Updated Person", notes = "Update/merge for an existing person whose ID matches \"id\" in json body of\n" + " request\n")
 	public ResponseEntity<Person> updatePerson(@RequestBody Person p) {
 		System.out.println("/api/person PUT ");
 		if (p.getId() == 0) {
@@ -78,6 +86,8 @@ public class MdbAppJsonController {
 	// creates a new movie - at least title must be provided and must not
 	// already exist
 	@RequestMapping(path = "/api/movie", method = RequestMethod.POST)
+	@ApiOperation(value = "Create New Movie", notes = "Creates a new movie - at least title must be provided and must not\n" + 
+		"already exist")
 	public ResponseEntity<Movie> createMovie(@RequestBody Movie m) {
 		String title = m.getTitle();
 		if (title == null) {
@@ -146,6 +156,7 @@ public class MdbAppJsonController {
 
 	// deletes an existing movie whose ID matches the URL parameter
 	@RequestMapping(path = "/api/movie/{id}", method = RequestMethod.DELETE)
+	@ApiOperation(value = "Delete Movie By ID", notes = "Deletes an existing movie whose ID matches the URL parameter")
 	public ResponseEntity<String> deleteMovie(@PathVariable(name = "id", required = true) Integer id) {
 		System.out.println("/api/movie/{id} DELETE " + id);
 		;
@@ -164,6 +175,8 @@ public class MdbAppJsonController {
 	// updates/merges an existing movie where id matches the id contained in the
 	// json body of the request
 	@RequestMapping(path = "/api/movie", method = RequestMethod.PUT)
+	@ApiOperation(value = "Update Movie", notes = "Updates/merges an existing movie where id matches the id contained in the\n" + 
+			" json body of the request")
 	public ResponseEntity<Movie> updateMovie(@RequestBody Movie m) {
 		System.out.println(" api/movie  PUT  id is" + m.getId());
 		if (m.getId() == 0) {
@@ -261,6 +274,8 @@ public class MdbAppJsonController {
 	// returns movie object(s) matching whose title matches or partially matches
 	// title in parameter, case insensitive
 	@RequestMapping(path = "/api/movie/title/{title}", method = RequestMethod.GET)
+	@ApiOperation(value = "Get Movie By Title", notes = "Returns movie object(s) matching whose title matches or partially matches\n" + 
+			" title in parameter, case insensitive")
 	public ResponseEntity<List<Movie>> findByTitleLike(@PathVariable(name = "title", required = true) String title) {
 		System.out.println("/api/movie/title/{title} is " + title);
 		if (title == null) {
@@ -276,6 +291,8 @@ public class MdbAppJsonController {
 	// returns an array of movie objects where actors name at
 	// least partially match name parameter
 	@RequestMapping(path = "/api/movie/actor/{name}", method = RequestMethod.GET)
+	@ApiOperation(value = "Get Actor By Name", notes = "Returns an array of movie objects where actors name at\n" + 
+			" least partially match name parameter")
 	public ResponseEntity<List<Movie>> findByActorLike(@PathVariable(name = "name", required = true) String name) {
 		System.out.println("/api/movie/actor/{name} name is " + name);
 		if (name == null) {
@@ -290,6 +307,8 @@ public class MdbAppJsonController {
 	// returns an array of movie objects where directors name at
 	// least partially match name parameter
 	@RequestMapping(path = "/api/movie/director/{name}", method = RequestMethod.GET)
+	@ApiOperation(value = "Get Director By Name", notes = "Returns an array of movie objects where directors name at\n" + 
+			" least partially match name parameter")
 	public ResponseEntity<List<Movie>> findByDirectorLike(@PathVariable(name = "name", required = true) String name) {
 		System.out.println("/api/movie/director/{name} name is " + name);
 		if (name == null) {
@@ -304,6 +323,8 @@ public class MdbAppJsonController {
 	// returns an array of movie objects where authors name at
 	// least partially match name parameter
 	@RequestMapping(path = "/api/movie/author/{name}", method = RequestMethod.GET)
+	@ApiOperation(value = "Get Author By Name", notes = "Returns an array of movie objects where authors name at\n" + 
+			" least partially match name parameter")
 	public ResponseEntity<List<Movie>> findByAuthorLike(@PathVariable(name = "name", required = true) String name) {
 		System.out.println("/api/movie/director/{name} name is " + name);
 		if (name == null) {
@@ -318,6 +339,8 @@ public class MdbAppJsonController {
 	// returns an array of movie objects whose genre matches or partially
 	// matches URL parameter, case insensitive
 	@RequestMapping(path = "/api/movie/genre/{genre}", method = RequestMethod.GET)
+	@ApiOperation(value = "Get Movie By Genre", notes = "Returns an array of movie objects whose genre matches or partially\n" + 
+			" matches URL parameter, case insensitive")
 	public ResponseEntity<List<Movie>> findByGenreLike(@PathVariable(name = "genre", required = true) String genre) {
 		System.out.println("/api/movie/genre/ is " + genre);
 		if (genre == null) {
@@ -332,6 +355,8 @@ public class MdbAppJsonController {
 	// returns an array of movie objects whose year matches or partially matches
 	// URL parameter, case insensitive
 	@RequestMapping(path = "/api/movie/year/{year}", method = RequestMethod.GET)
+	@ApiOperation(value = "Get Movie By Release Year", notes = "Returns an array of movie objects whose year matches or partially matches\n" + 
+			"	// URL parameter, case insensitive")
 	public ResponseEntity<List<Movie>> findByYearLike(@PathVariable(name = "year", required = true) String year) {
 		System.out.println("/api/movie/year/ is " + year);
 		if (year == null) {
@@ -346,6 +371,8 @@ public class MdbAppJsonController {
 	// returns an array of Person objects who are actors and whose name matches
 	// or partially matches URL parameter, case insensitive
 	@RequestMapping(path = "/api/actor/{name}", method = RequestMethod.GET)
+	@ApiOperation(value = "Get Actor By Name", notes = "Returns an array of Person objects who are actors and whose name matches\n" + 
+			"	or partially matches URL parameter, case insensitive")
 	public ResponseEntity<List<Person>> findActorsByNameLike(
 			@PathVariable(name = "name", required = true) String name) {
 		System.out.println("/api/actor/name/ is " + name);
@@ -361,6 +388,8 @@ public class MdbAppJsonController {
 	// returns an array of Person objects who are directors and whose name
 	// matches or partially matches URL parameter, case insensitive
 	@RequestMapping(path = "/api/director/{name}", method = RequestMethod.GET)
+	@ApiOperation(value = "Get Directory By Name", notes = "Returns an array of Person objects who are directors and whose name\n" + 
+			" matches or partially matches URL parameter, case insensitive")
 	public ResponseEntity<List<Person>> findDirectorsByNameLike(
 			@PathVariable(name = "name", required = true) String name) {
 		System.out.println("/api/director/name/ is " + name);
@@ -376,6 +405,8 @@ public class MdbAppJsonController {
 	// returns an array of Person objects who are authors and whose name matches
 	// or partially matches URL parameter, case insensitive
 	@RequestMapping(path = "/api/author/{name}", method = RequestMethod.GET)
+	@ApiOperation(value = "Get Author By Name", notes = "Returns an array of Person objects who are authors and whose name matches\n" + 
+			"	// or partially matches URL parameter, case insensitive")
 	public ResponseEntity<List<Person>> findAuthorsByNameLike(
 			@PathVariable(name = "name", required = true) String name) {
 		System.out.println("/api/author/name/ is " + name);
@@ -390,6 +421,7 @@ public class MdbAppJsonController {
 
 	// returns an array of Person objects who are directors
 	@RequestMapping(path = "/api/directors", method = RequestMethod.GET)
+	@ApiOperation(value = "Get All Directors", notes = "Returns an array of Person objects who are directors")
 	public ResponseEntity<List<Person>> findAllDirectors() {
 		System.out.println("/api/directors GET");
 
@@ -401,6 +433,7 @@ public class MdbAppJsonController {
 
 	// returns an array of Person objects who are actors
 	@RequestMapping(path = "/api/actors", method = RequestMethod.GET)
+	@ApiOperation(value = "Get All Actors", notes = "Returns an array of Person objects who are actors")
 	public ResponseEntity<List<Person>> findAllActors() {
 		System.out.println("/api/actors GET");
 
@@ -412,6 +445,7 @@ public class MdbAppJsonController {
 
 	// returns an array of Person objects who are authors
 	@RequestMapping(path = "/api/authors", method = RequestMethod.GET)
+	@ApiOperation(value = "Get All Authors", notes = "Returns news items")
 	public ResponseEntity<List<Person>> findAllAuthors() {
 		System.out.println("/api/authors GET");
 
@@ -423,6 +457,7 @@ public class MdbAppJsonController {
 	
 	// returns an array of all movie objects 
 		@RequestMapping(path = "/api/movies", method = RequestMethod.GET)
+		@ApiOperation(value = "Get All Movies", notes = "Returns an array of all movie objects")
 		public ResponseEntity<List<Movie>> findAllMovies() {
 			System.out.println("/api/movies GET " );
 			
