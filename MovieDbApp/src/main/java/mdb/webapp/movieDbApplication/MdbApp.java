@@ -43,6 +43,7 @@ public class MdbApp {
 				.pathMapping("/")
 				.apiInfo(metaData());
 	}
+
 	
 	   private ApiInfo metaData() {
 	        ApiInfo apiInfo = new ApiInfo(
@@ -59,13 +60,14 @@ public class MdbApp {
 	   
 	   
 	   public static final List<String> DEFAULT_INCLUDE_PATTERNS = Arrays.asList("/news/.*");
-	    public static final String SWAGGER_GROUP = "mobile-api";
+	   public static final String SWAGGER_GROUP = "mobile-api";
 	 
-	    @Value("${app.docs}")
-	    private String docsLocation;
+	    /*@Value("${app.docs}")
+	    private String docsLocation;*/
 	 
 	    	 
 	  
+
 //	@Override
 //    public void run(String... strings) throws Exception {
 //        System.out.printf("The database contains %s movie.\n", movieRepository.count());
