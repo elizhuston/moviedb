@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.domain.Persistable;
 

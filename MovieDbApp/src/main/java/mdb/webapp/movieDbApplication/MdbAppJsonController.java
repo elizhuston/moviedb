@@ -3,10 +3,14 @@ package mdb.webapp.movieDbApplication;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -14,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.mvc.Controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,7 +30,7 @@ import io.swagger.annotations.ApiOperation;
 
 @Api(value = "Movies ", description = "Movies API")
 
-public class MdbAppJsonController {
+public class MdbAppJsonController implements Controller {
 	@Autowired
 	private MovieRepository movieRepository;
 
@@ -469,6 +475,15 @@ public class MdbAppJsonController {
 			System.out.println("Size of movies is" + movies.size());
 			return new ResponseEntity<List<Movie>>(movies, HttpStatus.OK);
 
+		}
+
+		@Override
+		public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			 // process the request...
+	        ModelAndView mav = new ModelAndView();
+	        // add data as necessary to the model...
+	        return mav;
+	        // notice that no View or logical view name has been set
 		}
 		
 

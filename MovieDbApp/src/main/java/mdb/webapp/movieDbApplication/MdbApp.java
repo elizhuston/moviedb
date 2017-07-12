@@ -31,7 +31,10 @@ public class MdbApp {
 	public static void main(String[] args) {
 		SpringApplication.run(MdbApp.class, args);
 	}
-	
+	@Bean
+	public MovieValidator beforeCreateMovieValidator() {
+	    return new MovieValidator();
+	}
 	  
 	@Bean
 	public Docket swaggerSettings() {
